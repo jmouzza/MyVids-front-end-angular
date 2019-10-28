@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*
+footer{
+	background: #2F2F2F;
+	height: 130px;
+	line-height: 130px;
+	text-align: center;
+	color: rgba(255,255,255,.5);
+	margin-top: 10px;
+}
+*/
+
+html{ height:100%; }
+body{ min-height:97.5%; padding:0; margin:0; position:relative; }
+
+body::after{ content:''; display:block; height:100px; }
+
+footer{ 
+  position:absolute; 
+  bottom:0; 
+  width:100%; 
+  height:80px;
+  background: #2F2F2F; 
+  color: rgba(255,255,255,.5);
+  line-height: 80px;
+  text-align: center;
+}
