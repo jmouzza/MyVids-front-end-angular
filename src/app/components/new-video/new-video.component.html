@@ -1,0 +1,27 @@
+<div class="col-md-12 m-auto pt-3 text-center">
+	<h6>{{page_title}}</h6>
+	<hr>
+	<div class="row mb-3" *ngIf="status != null">
+			<div class="col-md-5 m-auto alert alert-success" *ngIf="status == 'success'">
+				{{message}}
+			</div>
+			<div class="col-md-5 m-auto alert alert-danger" *ngIf="status == 'error'">
+				{{message}}
+			</div>	
+	</div>
+	<form class="col-md-5 m-auto p-0" #newVideoForm="ngForm" (ngSubmit)="onSubmit(newVideoForm)">
+		<div class="form-group">
+			<input type="text" name="title" #title="ngModel" [(ngModel)]="video.title" class="form-control" placeholder="Título" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]+" required>
+			<small class="invalid-feedback d-block" *ngIf="title.invalid && title.touched">Introduce un título válido</small>
+		</div>
+		<div class="form-group">
+			<textarea type="text" name="description" #description="ngModel" [(ngModel)]="video.description" class="form-control" placeholder="Descripción" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]+" required> </textarea> 
+			<small class="invalid-feedback d-block" *ngIf="description.invalid && description.touched">Introduce una descripción válida</small>
+		</div>
+		<div class="form-group">
+			<input type="text" name="url" #url="ngModel" [(ngModel)]="video.url" class="form-control" placeholder="URL" required>
+			<small class="invalid-feedback d-block" *ngIf="url.invalid && url.touched">Introduce una URL válida</small>
+		</div>
+		<input type="submit" class="btn btn-primary" value="Guardar" [disabled]="newVideoForm.invalid" required>
+	</form>
+</div>

@@ -1,0 +1,26 @@
+<div class="col-md-12">
+	<h6 class="pt-3 text-center">
+	{{page_title}}
+	</h6>
+	<hr/>
+	<div class="row mb-3">
+		<div class="col-md-5 alert alert-success m-auto" *ngIf="status == 'success'">
+			{{message}}
+		</div>
+		<div class="col-md-5 alert alert-danger m-auto" *ngIf="status == 'error'">
+			{{message}}
+		</div>	
+	</div>
+	<form #updateVideo="ngForm" (ngSubmit)="onSubmit(updateVideo)" class="col-md-5 m-auto p-0">
+		<div class="form-group">
+			<input type="text" name="title" #title="ngModel" [(ngModel)]="video.title" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<input type="text" name="description" #description="ngModel" [(ngModel)]="video.description" class="form-control" required>
+		</div>
+		<div class="form-group">
+			<input type="text" name="url" #url="ngModel" [(ngModel)]="video.url" class="form-control" required>
+		</div>
+		<input type="submit" value="Actualizar" class="btn btn-primary" [disabled]="updateVideo.invalid">
+	</form>
+</div>

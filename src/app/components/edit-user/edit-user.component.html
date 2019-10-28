@@ -1,0 +1,24 @@
+<div class="col-md-12 text-center pt-3">
+	<h6 class="text-center">{{page_title}}</h6>
+	<hr/>
+	<div class="row mb-3">
+		<div class="m-auto col-md-5 alert alert-success" *ngIf="status == 'success'">
+			{{message}}
+		</div>
+		<div class="m-auto col-md-5 alert alert-danger" *ngIf="status == 'error'">
+			ERROR. {{message}}
+		</div>
+	</div>
+	<form class="col-md-5 m-auto p-0" #updateUserForm="ngForm" (ngSubmit)="onSubmit(updateUserForm)">
+		<div class="form-group">
+			<input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]+" required>
+		</div>
+		<div class="form-group">
+			<input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]+" required>
+		</div>
+		<div class="form-group">
+			<input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+		</div>
+		<input type="submit" class="btn btn-primary" value="Actualizar" [disabled]="updateUserForm.invalid">
+	</form>
+</div>

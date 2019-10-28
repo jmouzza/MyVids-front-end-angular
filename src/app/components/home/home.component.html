@@ -1,0 +1,104 @@
+<div class="col-md-12 m-auto">
+	<div class="text-center pt-3" *ngIf="identity && total_videos>0">
+		<h6>{{page_title}}</h6>
+		<hr/>
+		<div class="row mb-3">
+			<div class="alert alert-success col-md-8 m-auto" *ngIf="status == 'success'">
+				{{message}}
+			</div>
+			<div class="alert alert-danger" *ngIf="status == 'error'">
+				{{message}}
+			</div>
+		</div>
+		<div class="card-colums col-md-8 m-auto">
+			<article class="card mb-3" style="width: 100%" *ngFor="let video of videos">
+				<div class="card-header">
+					<h5>{{video.title}}</h5>
+				</div>
+				<div class="card-body">
+					<p>
+						<iframe width="560" height="315" [src]="getVideoIframe(video.url)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</p>
+					<p>
+						{{video.description}}
+					</p>
+					
+					<a [routerLink]="['/edit_video',video.id]" class="btn btn-sm btn-primary">
+						Modificar
+					</a>
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-sm btn-danger ml-3" data-toggle="modal" [attr.data-target]="'#myModal'+video.id">
+					  Eliminar
+					</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="{{'myModal'+video.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">Advertencia</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        ¿Seguro deseas eliminar el video: {{video.title}}?
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					        <button (click)="deleteVideo(video.id)" type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					
+				</div>
+			</article>
+		</div>
+		<nav class="col-md-8 m-auto" aria-label="Page navigation example">
+		  <ul class="pagination">
+		    <li class="page-item">
+		      <a class="page-link" [routerLink]="['/home',prev_page]" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		        <span class="sr-only">Previous</span>
+		      </a>
+		    </li>
+		    <li class="page-item" *ngFor="let num of number_pages">
+		    	<a class="page-link" [routerLink]="['/home',num]">
+		    		{{num}}
+				</a>
+			</li>
+		    <li class="page-item">
+		      <a class="page-link" [routerLink]="['/home',next_page]" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		        <span class="sr-only">Next</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+	</div>
+		<div class="col-md-12 m-auto" *ngIf="identity && total_videos == 0">
+		<hr>
+		<h4 class="text-center pt-3">
+			Aun no has agregado videos
+		</h4>
+		<h5 class="text-center">
+			<a [routerLink]="['/new_video']">Comienza ahora</a>
+		</h5>
+		<hr>
+	</div>
+	<div class="col-md-12 mt-3" *ngIf="!identity">
+		<div class="jumbotron">
+			<h3>Bienvenido a MyVids</h3>
+			<p class="lead">Regístrate en la web o inicia sesión para guardar y tener en un solo lugar todos tus videos favoritos de YOUTUBE</p>
+			<p class="lead">
+				<a [routerLink]="['/login']" class="btn btn-md btn-primary">
+					Inicia Sesión
+				</a>
+				<a [routerLink]="['/register']" class="btn btn-md btn-danger ml-3">
+					Regístrate
+				</a>
+			</p>
+		</div>
+	</div>
+</div>
